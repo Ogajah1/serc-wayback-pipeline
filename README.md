@@ -44,8 +44,6 @@ To comply with data protection standards (GDPR) and professional security practi
 
 ## 📋 Setup & Usage
 
-## 📋 Setup & Usage
-
 ### 1. Environment Variables & API Credentials
 To run this pipeline locally, create a `.env` file in the root directory:
 ```bash

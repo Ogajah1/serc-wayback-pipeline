@@ -66,10 +66,10 @@ pip install -r requirements.txt
 The pipeline will process the input, handle API calls, and append results to the output CSV. It supports resuming if interrupted. 
 ---
 ### 4. Limitations
-**API Quotas**: The free tier of Google Custom Search API is limited to ~100 queries per day. For larger datasets, consider the paid tier, multiple API keys, or alternative search APIs like Bing.
-**Scalability**: Currently synchronous; for very large inputs (>1,000 firms), implement asynchronous calls (e.g., via asyncio) to improve performance.
-**Data Accuracy**: SERC counts are estimates and may vary; results depend on Google's indexing of historical sites. This limitation is standard in SERC-based empirical research and are addressed through robustness checks at the analysis stage.
-**Multilingual Coverage**: Keywords are tailored to Spanish regions but may miss niche dialects or evolving terminology.
+- **API Quotas:** The free tier of Google Custom Search API is limited to ~100 queries per day. For larger datasets, consider the paid tier, multiple API keys, or alternative search APIs like Bing.
+- **Scalability:** Currently synchronous; for very large inputs (>1,000 firms), implement asynchronous calls (e.g., via asyncio) to improve performance.
+- **Data Accuracy:** SERC counts are estimates and may vary; results depend on Google's indexing of historical sites. This limitation is standard in SERC-based empirical research and are addressed through robustness checks at the analysis stage.
+- **Multilingual Coverage:** Keywords are tailored to Spanish regions but may miss niche dialects or evolving terminology.
 ---
 
 ## 🎓 How to Cite

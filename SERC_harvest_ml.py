@@ -57,21 +57,29 @@ def get_multilingual_serc(domain):
     except: return None
 
 # --- 3. EXECUTION ---
+# --- 3. EXECUTION ---
 if __name__ == "__main__":
     df_map = pd.read_csv(INPUT_MAPPING)
     
+    # NEW: Detect which ID column exists (nif or nif_anon)
+    id_col = 'nif' if 'nif' in df_map.columns else 'nif_anon'
+    if id_col not in df_map.columns:
+        raise ValueError(f"Could not find a NIF or Anonymous ID column in {INPUT_MAPPING}")
+
     # Resume Logic
-    done_nifs = set()
+    done_ids = set()
     if os.path.exists(OUTPUT_FILE):
         df_done = pd.read_csv(OUTPUT_FILE)
-        done_nifs = set(df_done['nif'].astype(str).unique())
+        # Check for 'nif' in existing results; if missing, use 'nif_anon'
+        existing_col = 'nif' if 'nif' in df_done.columns else 'nif_anon'
+        done_ids = set(df_done[existing_col].astype(str).unique())
 
-    print(f"🚀 Starting Multilingual SERC Harvest: {len(df_map) - len(done_nifs)} firms remaining.")
+    print(f"🚀 Starting Harvest using column '{id_col}': {len(df_map) - len(done_ids)} firms remaining.")
 
     results = []
     for idx, row in df_map.iterrows():
-        nif = str(row['nif'])
-        if nif in done_nifs: continue
+        current_id = str(row[id_col]) # Use the dynamically detected column
+        if current_id in done_ids: continue
 
         domain = extract_domain(row['archive_url'])
         if not domain: continue
@@ -82,7 +90,8 @@ if __name__ == "__main__":
             break
 
         if count is not None:
-            results.append({'nif': nif, 'domain': domain, 'serc_count': count})
+            # Save using the same column name found in the input mapping
+            results.append({id_col: current_id, 'domain': domain, 'serc_count': count})
 
         if len(results) >= 20:
             pd.DataFrame(results).to_csv(OUTPUT_FILE, mode='a', header=not os.path.exists(OUTPUT_FILE), index=False)

@@ -44,28 +44,37 @@ To comply with data protection standards (GDPR) and professional security practi
 
 ## 📋 Setup & Usage
 
-### 1. Environment Variables
-To run this pipeline locally, create a `.env` file and add:
+## 📋 Setup & Usage
+
+### 1. Environment Variables & API Credentials
+To run this pipeline locally, create a `.env` file in the root directory:
 ```bash
-GOOGLE_API_KEY='your_google_api_key_here'
-SEARCH_ENGINE_ID='your_custom_search_engine_id_here'
-INPUT_PATH='data/sample_data.csv'  # Optional: Override default input file
-OUTPUT_PATH='serc_multilingual_results.csv'  # Optional: Override default output file
+GOOGLE_API_KEY='your_key'
+SEARCH_ENGINE_ID='your_cx_id'
+INPUT_PATH='data/sample_data.csv'  # Optional: Default for local testing
+OUTPUT_PATH='serc_multilingual_results.csv'
 ```
+
 To obtain Google API credentials:
 - Create a project in the Google Cloud Console.
 - Enable the Custom Search JSON API.
 - Generate an API key and create a Programmable Search Engine (formerly Custom Search Engine) ID
 ---
 ### 2. Installation 
--install the required dependencies
+# Clone the repository
+git clone [https://github.com/Ogajah1/serc-wayback-pipeline.git](https://github.com/Ogajah1/serc-wayback-pipeline.git)
+cd serc-wayback-pipeline
+
+# Install dependencies
 pip install -r requirements.txt
 ---
 ### 3. Running the Pipeline
 - First, ensure you've run the anonymization script `anonymize_data.py` if using real data. Then, execute the main harvest script `SERC_harvest_ml.py`
 The pipeline will process the input, handle API calls, and append results to the output CSV. It supports resuming if interrupted. 
 ---
-### 4. Limitations
+### 4. For Reproducibility & Testing
+First, Navigate to the Actions tab in this repository.Next, Select Manual SERC Harvest (Safe Mode) from the sidebar. Click Run workflow and download the serc-results.zip. under the artifact section. 
+### 5. Limitations
 - **API Quotas:** The free tier of Google Custom Search API is limited to ~100 queries per day. For larger datasets, consider the paid tier, multiple API keys, or alternative search APIs like Bing.
 - **Scalability:** Currently synchronous; for very large inputs (>1,000 firms), implement asynchronous calls (e.g., via asyncio) to improve performance.
 - **Data Accuracy:** SERC counts are estimates and may vary; results depend on Google's indexing of historical sites. This limitation is standard in SERC-based empirical research and are addressed through robustness checks at the analysis stage.

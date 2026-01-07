@@ -6,7 +6,7 @@ on:
 jobs:
   harvest:
     runs-on: ubuntu-latest
-    timeout-minutes: 15 
+    timeout-minutes: 15 # Safety kill-switch for cost control
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,8 +21,13 @@ jobs:
 
       - name: Run Harvest
         env:
-        
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           SEARCH_ENGINE_ID: ${{ secrets.SEARCH_ENGINE_ID }}
           INPUT_PATH: "data/sample_data.csv"
         run: python SERC_harvest_ml.py
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: serc-results
+          path: serc_multilingual_results.csv

@@ -57,7 +57,6 @@ def get_multilingual_serc(domain):
     except: return None
 
 # --- 3. EXECUTION ---
-# --- 3. EXECUTION ---
 if __name__ == "__main__":
     df_map = pd.read_csv(INPUT_MAPPING)
     

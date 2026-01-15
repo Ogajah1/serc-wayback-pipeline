@@ -1,6 +1,6 @@
-# Multilingual SERC Harvest Pipeline 🕸️
+# Multilingual SERC Harvest Pipeline
 
-## 📌 Overview
+##  Overview
 This repository contains a specialised data engineering pipeline designed for large-scale econometric research. It automates the collection of **Search Engine Result Counts (SERC)** across multiple languages (Spanish, Catalan, Basque, Galician) to measure corporate privacy transparency prior to GDPR enforcement. SERC is a methodology commonly used to measure online privacy disclosure and transparency in applied econometrics research.
 
 This tool was developed as part of my ongoing PhD research on **Privacy Regulations and Constraint-Induced Innovation**.
@@ -27,7 +27,7 @@ This tool was developed as part of my ongoing PhD research on **Privacy Regulati
 
 ---
 
-## 🔒 Data Privacy & Security
+## Data Privacy & Security
 To comply with data protection standards (GDPR) and professional security practices:
 - **No PII (Personally Identifiable Information):** All firm identifiers in this repository are synthetic. The master mapping key remains in a secure, local-only environment.
 - **Secret Management:** API keys are managed via environment variables and GitHub Secrets. 
